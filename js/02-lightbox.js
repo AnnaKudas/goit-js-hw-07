@@ -30,7 +30,7 @@ function handlerClick(evt) {
 
     const source = clickedElement.dataset.source;
 
-    // Use simpleLightbox's functions instead of basicLightbox
+
     const gallery = new SimpleLightbox('.gallery a', {
         captionsData: 'alt',
         captionDelay: 250,
