@@ -3,7 +3,6 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 const imageList = document.querySelector('.gallery');
 imageList.insertAdjacentHTML('beforeend', createMarkup(galleryItems));
-imageList.addEventListener('click', handlerClick);
 
 function createMarkup(arr) {
     return arr.map(({ preview, original, description }) =>
@@ -20,21 +19,9 @@ function createMarkup(arr) {
     ).join('');
 }
 
-function handlerClick(evt) {
-    evt.preventDefault();
-    const clickedElement = evt.target;
-
-    if (!clickedElement.classList.contains('gallery__image')) {
-        return;
-    }
-
-    const source = clickedElement.dataset.source;
-
-
-    const gallery = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionDelay: 250,
-    });
-}
+const gallery = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+});
 
 console.log(galleryItems);
