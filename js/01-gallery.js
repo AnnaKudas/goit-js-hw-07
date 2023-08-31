@@ -33,15 +33,26 @@ function handlerClick(evt) {
 
     const instance = basicLightbox.create(`
         <img src="${item.original}" width="800" height="600">
-    `);
-    instance.show();
+    `, {
+        onShow: (instance) => {
+            // Add event listener for the "Escape" key
+            const escapeListener = (escEvent) => {
+                if (escEvent.key === 'Escape') {
+                    instance.close();
+                }
+            };
+            document.addEventListener('keydown', escapeListener);
 
-    // Add event listener for the "Escape" key
-    document.addEventListener('keydown', (escEvent) => {
-        if (escEvent.key === 'Escape') {
-            instance.close();
+            // Store the escapeListener function in the instance for removal
+            instance.escapeListener = escapeListener;
+        },
+        onClose: (instance) => {
+            // Remove the event listener when the modal is closed
+            document.removeEventListener('keydown', instance.escapeListener);
         }
     });
+
+    instance.show();
 }
 
 console.log(galleryItems);
